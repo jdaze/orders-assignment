@@ -9,6 +9,7 @@ import dev.jdsoft.ordersassignment.persistence.entity.OrderProduct;
 import dev.jdsoft.ordersassignment.persistence.entity.Product;
 import dev.jdsoft.ordersassignment.persistence.entity.User;
 import dev.jdsoft.ordersassignment.service.OrderProductsService;
+import dev.jdsoft.ordersassignment.utility.ProductQuantityMerger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class OrderFacade {
     public OrderResponseModel createOrder(CreateOrderRequestModel requestModel) {
         var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        var productQuantities = orderProductsService.merge(requestModel.getProducts());
+        var productQuantities = ProductQuantityMerger.merge(requestModel.getProducts());
 
         var productsMap = orderProductsService.fetch(productQuantities)
                 .stream().collect(Collectors.toMap(Product::getId, p -> p));

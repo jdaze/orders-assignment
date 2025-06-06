@@ -26,20 +26,4 @@ public class OrderProductsService {
         }
         return found;
     }
-
-    public List<ProductQuantityRequestModel> merge(List<ProductQuantityRequestModel> products) {
-        return products.stream()
-                .collect(Collectors.groupingBy(
-                        ProductQuantityRequestModel::getProductId,
-                        Collectors.summingLong(ProductQuantityRequestModel::getQuantity)
-                ))
-                .entrySet().stream()
-                .map(entry -> {
-                    ProductQuantityRequestModel model = new ProductQuantityRequestModel();
-                    model.setProductId(entry.getKey());
-                    model.setQuantity(entry.getValue());
-                    return model;
-                })
-                .collect(Collectors.toList());
-    }
 }

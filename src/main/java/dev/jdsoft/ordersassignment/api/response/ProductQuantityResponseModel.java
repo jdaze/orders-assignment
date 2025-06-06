@@ -1,8 +1,6 @@
 package dev.jdsoft.ordersassignment.api.response;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -10,6 +8,8 @@ import java.math.RoundingMode;
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class ProductQuantityResponseModel {
 
     private ProductResponseModel product;

@@ -31,8 +31,22 @@ public class OrderProduct {
     private Product product;
 
     @Column(nullable = false)
-    private int quantity;
+    private Long quantity;
 
     @Column(name = "price_in_euros", nullable = false)
     private BigDecimal priceInEuros;
+
+    @Column(name = "complete_price_in_euros", nullable = false)
+    private BigDecimal completePriceInEuros;
+
+    public OrderProduct(Product product, Long quantity) {
+        this.product = product;
+        this.quantity = quantity;
+        this.priceInEuros = product.getPriceInEuros();
+        this.completePriceInEuros = calculatePrice();
+    }
+
+    private BigDecimal calculatePrice() {
+        return product.getPriceInEuros().multiply(BigDecimal.valueOf(quantity));
+    }
 }

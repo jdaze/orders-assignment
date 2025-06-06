@@ -29,4 +29,9 @@ public class Product {
     @Builder.Default
     @Column(name = "archived", nullable = false)
     private boolean archived = false;
+
+    public Product(String name, BigDecimal priceInEuros) {
+        this.name = name;
+        this.priceInEuros = priceInEuros;
+    }
 }

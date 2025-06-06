@@ -16,7 +16,7 @@ CREATE TABLE users (
 CREATE TABLE orders (
     id BIGINT NOT NULL AUTO_INCREMENT,
     user_id BIGINT NOT NULL,
-    creation_time DATETIME NOT NULL
+    creation_time DATETIME NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id)
         ON DELETE CASCADE
@@ -34,7 +34,7 @@ CREATE TABLE order_product (
     FOREIGN KEY (order_id) REFERENCES orders(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-    FOREIGN KEY (product_id) REFERENCES product(id)
+    FOREIGN KEY (product_id) REFERENCES products(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );

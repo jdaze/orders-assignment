@@ -1,6 +1,5 @@
 package dev.jdsoft.ordersassignment.api.request;
 
-import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,11 +20,11 @@ public class GetOrdersRequestModel {
     @NotNull(message = "\"to\" parameter is required and should be passed as epoch seconds.")
     private Long to;
 
-    public LocalDateTime getFromDate() {
-        return from != null ? Instant.ofEpochMilli(from).atZone(ZoneId.systemDefault()).toLocalDateTime() : null;
+    public LocalDateTime getFromDateTime() {
+        return from != null ? Instant.ofEpochSecond(from).atZone(ZoneId.systemDefault()).toLocalDateTime() : null;
     }
 
-    public LocalDateTime getToDate() {
-        return to != null ? Instant.ofEpochMilli(to).atZone(ZoneId.systemDefault()).toLocalDateTime() : null;
+    public LocalDateTime getToDateTime() {
+        return to != null ? Instant.ofEpochSecond(to).atZone(ZoneId.systemDefault()).toLocalDateTime() : null;
     }
 }

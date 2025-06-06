@@ -14,6 +14,6 @@ public class ProductQuantityRequestModel {
     @NotNull
     private Long productId;
 
-    @Min(1)
+    @Min(value = 1, message = "Quantity should be 1 or greater")
     private Long quantity;
 }

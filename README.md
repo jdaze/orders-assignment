@@ -29,7 +29,6 @@ What we can do:
 - we can setup basic authentication and create proper filter to authentication
 - add some public login endpoint which will generate JWT token and we can replace DefaultUserAuthenticationFilter with JWTAuthenticationFilter
 - we can setup OAuth2 with Keycloak, Amazon Cognito or other providers
-- 
 
 **2. How can you make the service redundant? What considerations should you do?**
 - service should be stateless

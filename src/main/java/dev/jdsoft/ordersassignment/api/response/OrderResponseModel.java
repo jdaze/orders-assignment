@@ -17,5 +17,6 @@ public class OrderResponseModel {
     private Long id;
     private List<ProductQuantityResponseModel> products;
     private BigDecimal priceInEuros;
+    private String email;
     private LocalDateTime creationTime;
 }

@@ -19,9 +19,10 @@ public class OrderConverter {
     }
 
     public static OrderResponseModel createResponseModel(Order order) {
+        var email = order.getUser().getEmail();
         var productQuantities = order.getOrderProducts().stream()
                 .map(OrderConverter::convertOrderProduct).collect(Collectors.toList());
-        return new OrderResponseModel(order.getId(), productQuantities, order.getPriceInEuros(), order.getCreationTime());
+        return new OrderResponseModel(order.getId(), productQuantities, order.getPriceInEuros(), email, order.getCreationTime());
     }
 
     public static List<OrderResponseModel> createResponseModel(List<Order> orders) {

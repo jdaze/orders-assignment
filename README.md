@@ -36,3 +36,15 @@ What we can do:
 - db replicas
 - health checks, monitoring and alarms
 - add observability (logs, metrics, traces)
+
+
+## Assumptions
+- Price can be 0 or more and should have at most 2 fractional digits
+- Order Products contain original product price + complete price for this product, complete price = product price * quantity
+- There's only mysql db. It would be better to keep orders in NOSQL db, like MongoDB because it's immutable (except user email)
+- User email can change, order api will return order with updated email
+- Create order API can consume duplicated data (multiple entries for the same product) -> all of them will result in single entry and quantities will be summed up (check ProductQuantityMerger)
+- There are default products and default user
+- Default user is automatically authenticated
+- Exception handling is really basic :)
+- Integeration tests are using testcontainers, there's only one unit test for ProductQuantityMerger

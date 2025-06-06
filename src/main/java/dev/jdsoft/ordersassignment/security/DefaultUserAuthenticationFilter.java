@@ -1,6 +1,6 @@
 package dev.jdsoft.ordersassignment.security;
 
-import dev.jdsoft.ordersassignment.persistence.dao.UserRepository;
+import dev.jdsoft.ordersassignment.facade.UserFacade;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +21,7 @@ public class DefaultUserAuthenticationFilter extends OncePerRequestFilter {
 
     private static final String DEFAULT_EMAIL = "john.doe@example.com";
 
-    private final UserRepository userRepository;
+    private final UserFacade userFacade;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -29,7 +29,7 @@ public class DefaultUserAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        userRepository.findByEmail(DEFAULT_EMAIL).ifPresent(user -> {
+        userFacade.findByEmail(DEFAULT_EMAIL).ifPresent(user -> {
             Authentication auth = new UsernamePasswordAuthenticationToken(user, null, List.of(SecurityRoles.USER, SecurityRoles.ADMIN));
             SecurityContextHolder.getContext().setAuthentication(auth);
         });

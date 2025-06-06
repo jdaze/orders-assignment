@@ -11,14 +11,14 @@ import java.time.LocalDateTime;
 public class ApiExceptionHandler {
 
     @ExceptionHandler(OperationFailedException.class)
-    public ResponseEntity<?> handleOperationFailed(OperationFailedException ex) {
+    public ResponseEntity<ErrorResponseModel> handleOperationFailed(OperationFailedException ex) {
         var errorCode = ex.getErrorCode();
         return ResponseEntity.internalServerError().body(
                 new ErrorResponseModel(LocalDateTime.now(), errorCode.getCode(), errorCode.getMessage(), ex.getMessage()));
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> handleOtherExceptions(Exception ex) {
+    public ResponseEntity<ErrorResponseModel> handleOtherExceptions(Exception ex) {
         var errorCode = ErrorCode.GENERIC_ERROR;
         return ResponseEntity.internalServerError().body(
                 new ErrorResponseModel(LocalDateTime.now(), errorCode.getCode(), errorCode.getMessage(), ex.getMessage()));
